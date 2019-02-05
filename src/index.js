@@ -211,6 +211,8 @@ ReactDOM.render(
       <Compare title="Payload" code={payloadExample} img={payload} />
       <Compare title="Signature" code={signatureExample} img={signature} />
 
+      <Subtitle text="Let's see it in action" note="Demo in insomnia. Expired JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.SydhBwpSQJhjtGZ9dafuu1Vl8cvqBtsEHH2BHEn_oSY Invalid signature: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.BcOa0Bt0Az1f-RWAT9CFyw7pUb2dMIMDRb5vgjjNKBU Valid JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.yZK3swRZOI3Ed2X1iz5np-CQyXG9qNTy_5gCcu2tyU0" />
+
       <JWT />
 
       <Subtitle
@@ -255,7 +257,6 @@ ReactDOM.render(
 
       <SPASummary />
 
-      <Subtitle text="Let's see it in action" note="Demo in insomnia. Expired JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.SydhBwpSQJhjtGZ9dafuu1Vl8cvqBtsEHH2BHEn_oSY Invalid signature: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.BcOa0Bt0Az1f-RWAT9CFyw7pUb2dMIMDRb5vgjjNKBU Valid JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.yZK3swRZOI3Ed2X1iz5np-CQyXG9qNTy_5gCcu2tyU0" />
       <Code code={jsExample} />
       <Subtitle text="OAuth" note="Who’s ever heard of OAuth? Eg, Google, Facebook, twitter, …" />
       <Subtitle text="OpenId Connect" note="And what about OIDC. OIDC is OAuth with an extra identity layer on top. Example is It’s me, Auth0, Google, amazon, …"/>
@@ -364,7 +365,7 @@ ReactDOM.render(
       <FinalSummary />
 
       <Questions />
-      <Subtitle text="Tack" />
+      <Subtitle text="Thanks!" />
       <Thanks />
       <Poes2 />
     </Deck>,
