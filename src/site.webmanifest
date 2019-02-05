@@ -1,6 +1,6 @@
 {
-    "name": "You might not need a native app for that!",
-    "short_name": "You might not need a native app for that!",
+    "name": "JWT.sambego.tech",
+    "short_name": "JWT",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -8,13 +8,12 @@
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-384x384.png",
-            "sizes": "384x384",
+            "src": "/android-chrome-256x256.png",
+            "sizes": "256x256",
             "type": "image/png"
         }
     ],
-    "theme_color": "#5aaaab",
-    "background_color": "#5aaaab",
-    "start_url": "http://go-web.sambego.be",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
     "display": "standalone"
 }

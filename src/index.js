@@ -183,7 +183,7 @@ ReactDOM.render(
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c", opacity: ".1"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
       <Code title="Payload" code={payloadExample} note="The payload contains claims. A claim is a key value pair of information which can be useful to the SPA" />
       <Code title="Reserved claims" code={ReservedClaimsExample} />
-      <Code title="Public claims" code={PublicClaimsExample} note="Claims registered with IANA -> https://www.iana.org/assignments/jwt/jwt.xhtml. Meant for api interoperability. eg: family_nam, given_name (not first_name), "/>
+      <Code title="Public claims" code={PublicClaimsExample} note="Claims registered with IANA -> https://www.iana.org/assignments/jwt/jwt.xhtml#claims Meant for api interoperability. eg: family_nam, given_name (not first_name), "/>
       <Code title="Private claims" code={PrivateClaimsExample} />
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
       <Code title="Signature" code={signatureExample} />
@@ -372,6 +372,8 @@ ReactDOM.render(
         <li><a href="https://auth0.com/blog/oauth2-implicit-grant-and-spa/" target="_blank" style={{display: 'block', color: 'black'}}>https://auth0.com/blog/oauth2-implicit-grant-and-spa/</a></li>
         <li><a href="https://auth0.com/blog" target="_blank" style={{display: 'block', color: 'black'}}>https://auth0.com/blog</a></li>
       </List>} />
+
+      <Subtitle text={<a href="https://jwt.sambego.tech/" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech/</a>} />
 
       <Questions />
       <Thanks />
