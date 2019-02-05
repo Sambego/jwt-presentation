@@ -14,7 +14,7 @@ import Code from  './slides/Code';
 import Compare from './slides/Compare';
 import AlgSummary from './slides/AlgSummary';
 import JWTPlayground from  './slides/JWTPlayground';
-import JWT from  './slides/JWT';
+import JWT from  './slides/jwt';
 import Webauthn from './slides/Webauthn';
 import FinalSummary from './slides/FinalSummary';
 import Questions from "./slides/Questions";
