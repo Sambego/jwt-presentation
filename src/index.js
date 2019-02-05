@@ -13,6 +13,7 @@ import SPASummary from  './slides/SPASummary';
 import Code from  './slides/Code';
 import Compare from './slides/Compare';
 import AlgSummary from './slides/AlgSummary';
+import JWTPlayground from  './slides/JWTPlayground';
 import JWT from  './slides/JWT';
 import Webauthn from './slides/Webauthn';
 import FinalSummary from './slides/FinalSummary';
@@ -53,6 +54,11 @@ import oidc7 from "./images/oidc/7.svg";
 import oidc8 from "./images/oidc/8.svg";
 import oidc9 from "./images/oidc/9.svg";
 import oidc10 from "./images/oidc/10.svg";
+
+import pkce1 from "./images/pkce/1.svg";
+import pkce2 from "./images/pkce/2.svg";
+import pkce3 from "./images/pkce/3.svg";
+import pkce4 from "./images/pkce/4.svg";
 
 import webauthn1 from "./images/webauthn/1.svg";
 import webauthn2 from "./images/webauthn/2.svg";
@@ -156,10 +162,64 @@ ReactDOM.render(
 
       <Subtitle
         text="Token based authentication"
+      />
+
+      <Subtitle
+        text="What the #&$* is a token?"
+        background="#69c"
+        color="#fff"
+        note="A token is any unique string that can be used as an identifier. Oauth does not specify what format a token should be. OIDC does specify that the ID token should be a JWT, but since it is just a layer on top of OAuth, the type of the access token and refresh token are free too choose"
+      />
+      <Subtitle text="A unique identifier representing something" />
+      <Subtitle text="Often an opaque string in the form of a UUID" />
+      <Subtitle text={(<span>JSON Web <span style={{color: "#69c"}}>Token</span></span>)} />
+      <Subtitle text={<span>At <span style={{color: '#EB5424'}}>Auth0</span> we use JWTs as much as possible!</span>} />
+      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
+      <Subtitle text="A JSON Web token is made out of 3 different parts" />
+      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c", opacity: ".1"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
+      <Code title="Header" code={headerExample}/>
+      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c", opacity: ".1"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
+      <Code title="Payload" code={payloadExample} note="The payload contains claims. A claim is a key value pair of information which can be useful to the SPA" />
+      <Code title="Reserved claims" code={ReservedClaimsExample} />
+      <Code title="Public claims" code={PublicClaimsExample} note="Claims registered with IANA -> https://www.iana.org/assignments/jwt/jwt.xhtml. Meant for api interoperability. eg: family_nam, given_name (not first_name), "/>
+      <Code title="Private claims" code={PrivateClaimsExample} />
+      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
+      <Code title="Signature" code={signatureExample} />
+      <Subtitle text="JWTs can be verified!"/>
+      <Code title="Signature" code={signatureExample2} />
+      <Code title="Signature" code={signatureExample3} note="Usually the secret will look like this, a random, unique generated 256bit string. This key is used by the server issuing the JWT to generate the signature. Anybody (any server) who knows the secret key can now verify if the signature is valid or not. Demo: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6IlNhbWJlZ28ifQ.hCBl313U03yirP8Om7njFCuA7yDn9bZJ8nf9bddEtyQ. Secret: “secret”"/>
+
+      <JWTPlayground />
+      <Code code={"const header = {...};\nconst payload = {...};\nconst secret = 'secret';\nconst signature = \n  CryptoJS.HmacSHA256(`${btoa(header)}.${btoa(payload)}`, secret)\n    .toString(CryptoJS.enc.Base64);\n\nconst JWT = `${btoa(header)}.${btoa(payload).${signature};`"} />
+
+      <Subtitle text="Asymetric alogrithms" note="Use a private and public key combination to sign and verigy a JWT" />
+      <AlgSummary />
+
+      <Subtitle text="Sharing keys" note="Sometimes you want to share secrets between parties, when using an alorithm wich uses a private, public key, you can share the public key with a JWK" />
+      <Subtitle text="JWK" note="JSON Web Key" />
+      <Code code={'{\n  \"keys\": [\n    {\n      \"alg\": \"RS256\",\n      \"kty\": \"RSA\",\n      \"use\": \"sig\",\n      \"x5c\": [\n        \"MIIDAzC...8JufiAw==\"\n      ],\n      \"n\": \"qJdLkrX...SE4havw\",\n      \"e\": \"AQAB\",\n      \"kid\": \"NDZDOTV...E1NDgxNg\",\n      \"x5t\": \"NDZDOTV...E1NDgxNg\"\n    }\n  ]\n}'} />
+
+
+      <Subtitle text="JW*" />
+      <Subtitle text="JWT" note="JSON Web Token" />
+      <Subtitle text="JWK" note="JSON Web Key" />
+      <Subtitle text="JWS" note="JSON Web Signature" />
+      <Subtitle text="JWE" note="JSON Web Encryption" />
+
+      <Subtitle text="Let's make a little comparison"/>
+      <Compare title="Header" code={headerExample} img={header} />
+      <Compare title="Payload" code={payloadExample} img={payload} />
+      <Compare title="Signature" code={signatureExample} img={signature} />
+
+      <JWT />
+
+      <Subtitle
+        text="Token based authentication"
         background="#ec5f67"
         color="#fff"
         note="What do I mean with traditional web apps? Server side rendered apps, where each page change causes a refresh in the browser.Typically made in php, .net, ruby on rails, …"
       />
+
       <Scheme
         src={spa1}
         note="A user visits your web app, and wants to access a protected page"
@@ -192,6 +252,7 @@ ReactDOM.render(
         src={spa8}
         note="So, we are authenticated, let’s now request some data from our API"
       />
+
       <SPASummary />
 
       <Subtitle text="Let's see it in action" note="Demo in insomnia. Expired JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.SydhBwpSQJhjtGZ9dafuu1Vl8cvqBtsEHH2BHEn_oSY Invalid signature: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.BcOa0Bt0Az1f-RWAT9CFyw7pUb2dMIMDRb5vgjjNKBU Valid JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.yZK3swRZOI3Ed2X1iz5np-CQyXG9qNTy_5gCcu2tyU0" />
@@ -239,40 +300,28 @@ ReactDOM.render(
         src={oidc10}
         note="If the silent auth request returns tokens, we can use these to access protected resources"
       />
+
+      <Subtitle text="OAuth Implicit Flow" />
+      <Subtitle text="IETF published a new best practices document" note="The internet engineering taskforce" />
+      <Subtitle text="Authorization code with Proof Key for Code Exchange (PKCE) Flow" />
+
+      <Scheme
+        src={pkce1}
+      />
+      <Scheme
+        src={pkce2}
+      />
+      <Scheme
+        src={pkce3}
+      />
+      <Scheme
+        src={pkce4}
+      />
+
       <Subtitle text="Does this approach solve CORS?" note="Yes, the only server which needs to use the session cookie is the auth server" />
       <Subtitle text="Does this approach solve flow?" note="Yes, tokens can be passed from server to server. As long as all our servers can verify our tokens we can assure the user is allowed to access the API / resource" />
       <Subtitle text="Does this approach solve keeping state?" note="If we would save the tokens on the frontend we would not have to keep state on our servers, but unfortunately this can cause some security vulnerabilities.With this approach our auth server will still need to keep a list of sessions." />
 
-      <Subtitle
-        text="What the #&$* is a token?"
-        background="#69c"
-        color="#fff"
-        note="A token is any unique string that can be used as an identifier. Oauth does not specify what format a token should be. OIDC does specify that the ID token should be a JWT, but since it is just a layer on top of OAuth, the type of the access token and refresh token are free too choose"
-      />
-      <Subtitle text={(<span>JSON Web <span style={{color: "#69c"}}>Token</span></span>)} />
-      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
-      <Subtitle text="A JSON Web token is made out of 3 different parts" />
-      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c", opacity: ".1"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
-      <Code title="Header" code={headerExample}/>
-      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c", opacity: ".1"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
-      <Code title="Payload" code={payloadExample} note="The payload contains claims. A claim is a key value pair of information which can be useful to the SPA" />
-      <Code title="Reserved claims" code={ReservedClaimsExample} />
-      <Code title="Public claims" code={PublicClaimsExample} note="Claims registered with IANA -> https://www.iana.org/assignments/jwt/jwt.xhtml. Meant for api interoperability. eg: family_nam, given_name (not first_name), "/>
-      <Code title="Private claims" code={PrivateClaimsExample} />
-      <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
-      <Code title="Signature" code={signatureExample} />
-      <Subtitle text="JWTs can be verified!"/>
-      <Code title="Signature" code={signatureExample2} />
-      <Code title="Signature" code={signatureExample3} note="Usually the secret will look like this, a random, unique generated 256bit string. This key is used by the server issuing the JWT to generate the signature. Anybody (any server) who knows the secret key can now verify if the signature is valid or not. Demo: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6IlNhbWJlZ28ifQ.hCBl313U03yirP8Om7njFCuA7yDn9bZJ8nf9bddEtyQ. Secret: “secret”"/>
-
-      <Subtitle text="Let's make a little comparison"/>
-      <Compare title="Header" code={headerExample} img={header} />
-      <Compare title="Payload" code={payloadExample} img={payload} />
-      <Compare title="Signature" code={signatureExample} img={signature} />
-
-      <AlgSummary />
-
-      <JWT />
       <Subtitle
         text="Future of authentication"
         background="#f99157"
@@ -310,10 +359,12 @@ ReactDOM.render(
       <Subtitle text="Who has an authenticator device?" note="You sure? Who owns a phone or laptop with a fingerprint scanner or face id?"/>
       <Webauthn platform/>
 
+      <Subtitle text={<a href="https://webauthn.me" style={{color: 'black'}} target="_blank">https://webauthn.me</a>} />
+
       <FinalSummary />
 
       <Questions />
-      <Subtitle text="Благодаря" />
+      <Subtitle text="Tack" />
       <Thanks />
       <Poes2 />
     </Deck>,

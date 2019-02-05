@@ -8,7 +8,7 @@ const AlgummarySlide = ({ text }) => (
   <Slide>
     <Subtitle>Algorithms</Subtitle>
     <List>
-      <li>HMACSHA256, HMACSHA384, HMACSHA512</li>
+      <li style={{color: '#c9c9c9'}}>HMACSHA256, HMACSHA384, HMACSHA512</li>
       <li>RSASHA256, RSASHA384, RSASHA512</li>
       <li>ECDSASHA256, ECDSASHA384, ECDSASHA512</li>
       <li>RSAPSSSHA256, RSAPSSSHA384</li>

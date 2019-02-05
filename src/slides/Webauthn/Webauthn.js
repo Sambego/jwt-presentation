@@ -40,7 +40,12 @@ const WebauthnSlide = ({ platform }) => {
     attestationOptions.authenticatorSelection = {
       authenticatorAttachment: 'platform'
     }
+  }  else {
+    attestationOptions.authenticatorSelection = {
+      authenticatorAttachment: 'cross-platform'
+    }
   }
+
 
   const user = {
     id: createRandomUIntArray(),

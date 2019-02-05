@@ -1,0 +1,58 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.header,
+.payload,
+.secret {
+    padding: 1rem;
+    width: 100%;
+    margin: 0;
+    border: none;
+    outline: none;
+    font-size: 3rem;
+    font-family: monospace;
+}
+
+.header {
+  background: #ec5f67;
+}
+
+.payload {
+  background: #C594C5;
+}
+
+.secret {
+  background: #69c;
+}
+
+.button {
+  width: 100%;
+  max-width: 150px;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  background: var(--color-gray-medium);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.jwt {
+  width: 100%;
+  max-width: 800px;
+  overflow-wrap: break-word;
+  padding: 2rem;
+  background: var(--color-gray-dark);
+  color: white;
+  font-family: monospace;
+  font-size: 4rem;
+  text-align: left;
+  border-radius: 5px;
+}

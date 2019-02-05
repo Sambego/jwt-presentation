@@ -23,8 +23,9 @@ const About = () => (
                   <li>Developer Evangelist</li>
                   <li>Auth0</li>
                   <li>Google Developer Expert</li>
-                  <li>Fronteers</li>
-                    <li>@sambego</li>
+                  <li>Fronteers Belgium</li>
+                  <li>I&S Meetups London</li>
+                  <li>@sambego</li>
                 </List>
             </div>
         </Columns>
