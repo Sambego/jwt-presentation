@@ -20,6 +20,8 @@ import FinalSummary from './slides/FinalSummary';
 import Questions from "./slides/Questions";
 import Thanks from "./slides/Thanks";
 
+import List from "./components/List";
+
 import "./styles/styles.css";
 
 import traditional1 from "./images/traditional/1.svg";
@@ -364,8 +366,14 @@ ReactDOM.render(
 
       <FinalSummary />
 
+      <Subtitle text={<List>
+        <li><a href="https://jwt.io" target="_blank" style={{display: 'block', color: 'black'}}>https://jwt.io</a></li>
+        <li><a href="https://webauthn.me" target="_blank" style={{display: 'block', color: 'black'}}>https://webauthn.me</a></li>
+        <li><a href="https://auth0.com/blog/oauth2-implicit-grant-and-spa/" target="_blank" style={{display: 'block', color: 'black'}}>https://auth0.com/blog/oauth2-implicit-grant-and-spa/</a></li>
+        <li><a href="https://auth0.com/blog" target="_blank" style={{display: 'block', color: 'black'}}>https://auth0.com/blog</a></li>
+      </List>} />
+
       <Questions />
-      <Subtitle text="Thanks!" />
       <Thanks />
       <Poes2 />
     </Deck>,
