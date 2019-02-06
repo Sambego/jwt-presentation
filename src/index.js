@@ -174,6 +174,7 @@ ReactDOM.render(
       />
       <Subtitle text="A unique identifier representing something" />
       <Subtitle text="Often an opaque string in the form of a UUID" />
+      <Subtitle text="Can be XML (SAML)" />
       <Subtitle text={(<span>JSON Web <span style={{color: "#69c"}}>Token</span></span>)} />
       <Subtitle text={<span>At <span style={{color: '#EB5424'}}>Auth0</span> we use JWTs as much as possible!</span>} />
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
