@@ -59,6 +59,9 @@ export default {
             },
             {
                 from: "./src/browserconfig.xml"
+            },
+            {
+                from: "./_redirects"
             }
         ])
     ]
