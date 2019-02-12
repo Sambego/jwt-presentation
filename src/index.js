@@ -81,6 +81,15 @@ const ReservedClaimsExample = '{\n  \"sub\": 12345678, \n  \"iss\": \"Sambego\",
 const PublicClaimsExample = '{\n  \"family_name\": \"Bellen\", \n  \"given_name\": \"Sam\",\n  \"preferred_username\": \"Sambego\"\n}';
 const PrivateClaimsExample = '{\n  \"foo\": \"bar\",\n  \"anything\": \"you want\"\n}';
 const jsExample = "const headers = new Headers({\n  \"content-type\": \"application/json\",\n  \"Authorization\", \"Bearer RWA...CFyw7\"\n});\n\nconst request = new Request(\"https://api.sambego.be/cats\", {\n  headers,\n  method: \"GET\"\n});\n\nfetch(request)\n  .then(response => response.json())\n  .then(response => {\n    // 🎉 we made a request to a protected endpoint\n    console.log(response)\n  });";
+
+console.log('----------------');
+console.log('Checking what\'s under the hood? Let me make it easy for you!');
+console.log('The source of this presentation can be found at: https://github.com/sambego/jwt-presentation');
+console.log('Yes I know, it\'s all a bit of a hack :)');
+console.log('Want to create your own presentations using React components? Check here: https://sambego.github.io/diorama-demo/0');
+console.log('Got more questions? Contact me at https://twitter.com/sambego');
+console.log('----------------');
+
 ReactDOM.render(
   <Deck>
       <Title />
@@ -377,6 +386,7 @@ ReactDOM.render(
       <Subtitle text={<a href="https://jwt.sambego.tech/" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech/</a>} />
 
       <Questions />
+      <Subtitle text="Danke!" />
       <Thanks />
       <Poes2 />
     </Deck>,
