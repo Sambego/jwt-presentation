@@ -347,7 +347,6 @@ ReactDOM.render(
       <Subtitle text={<a href="https://london-node.jwt.sambego.tech" style={{color: 'black'}} target="_blank">https://london-node.jwt.sambego.tech/</a>} />
 
       <Questions />
-      <Subtitle text="Danke!" />
       <Thanks />
       <Poes2 />
     </Deck>,
