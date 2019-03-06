@@ -344,7 +344,7 @@ ReactDOM.render(
         <li><a href="https://auth0.com/blog" target="_blank" style={{display: 'block', color: 'black'}}>https://auth0.com/blog</a></li>
       </List>} />
 
-      <Subtitle text={<a href="https://jwt.sambego.tech/" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech/</a>} />
+      <Subtitle text={<a href="https://jwt.sambego.tech/" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech</a>} />
 
       <Questions />
       <Subtitle text="Danke!" />
