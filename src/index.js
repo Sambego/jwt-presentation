@@ -335,45 +335,6 @@ ReactDOM.render(
       <Subtitle text="Does this approach solve flow?" note="Yes, tokens can be passed from server to server. As long as all our servers can verify our tokens we can assure the user is allowed to access the API / resource" />
       <Subtitle text="Does this approach solve keeping state?" note="If we would save the tokens on the frontend we would not have to keep state on our servers, but unfortunately this can cause some security vulnerabilities.With this approach our auth server will still need to keep a list of sessions." />
 
-      <Subtitle
-        text="Future of authentication"
-        background="#f99157"
-        color="#fff"
-        note="We talked a bit of the past and present of authenticating, but are there new technologies, ways to authenticate on the horizon?"
-      />
-      <Subtitle text="Web Authentication API" />
-      <Subtitle text="Web Authn" />
-      <Subtitle text={(<span>No more passwords<sup>*</sup> 🎉</span>)} note="Using the webauthn api we can register and authenticate using authentication devices instead of passwords. At the moment most browsers have only implemented half of the specs, but are working on it. It can already be used as a 2nd factor auth."/>
-      <Subtitle text="That’s not new, we’ve had passwordless login for a while now!" note="Eg slack, True, passwordless is becoming more and more common. With passwordless you register using a email and password. When you want to log in, you receive an email / sms with a link containing a single use token (otp) to login in. This works well, but is nog as seamless as we would like." />
-      <Subtitle text="Loggin in with an authenticator device" />
-
-      <Scheme
-        src={webauthn1}
-        note="The user wants to acces a protected resource"
-      />
-      <Scheme
-        src={webauthn2}
-        note="The auth server will return a challenge"
-      />
-      <Scheme
-        src={webauthn3}
-        note="The auth server will return a challenge to the browser. The connected authentication device will create a private/public key pair and sign this challenge using the private key"
-      />
-      <Scheme
-        src={webauthn4}
-        note="Once the auth device signed the challenge it will return the signed challenge"
-      />
-      <Scheme
-        src={webauthn5}
-        note="We send this response to our auth server where it will deduce the public key from the response. We can then save that public key with our user details. From now on we can validate each new response with this public key."
-      />
-
-      <Webauthn />
-      <Subtitle text="Who has an authenticator device?" note="You sure? Who owns a phone or laptop with a fingerprint scanner or face id?"/>
-      <Webauthn platform/>
-
-      <Subtitle text={<a href="https://webauthn.me" style={{color: 'black'}} target="_blank">https://webauthn.me</a>} />
-
       <FinalSummary />
 
       <Subtitle text={<List>
