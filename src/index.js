@@ -73,14 +73,16 @@ import payload from "./images/payload.svg";
 import signature from "./images/signature.svg";
 
 const headerExample = '{\n  "alg": "HS256",\n  "typ": "JWT"\n}';
-const payloadExample = '{\n  \"sub\": \"1234567890\",\n  \"given_name\": \"Sam\",\n  \"family_name\": \"Bellen\",\n  \"preferred_username\": \"Sambego\",\n  \"iat\": 1516239022\n}';
+const payloadExample = '{\n  \"sub\": \"1234567890\",\n  \"given_name\": \"Sam\",\n  \"family_name\": \"Bellen\",\n  \"preferred_username\": \"Sambego\",\n  \"iat\": 1516239022,\n  "exp": 1552305710\n}';
 const signatureExample = 'HMACSHA256(\n  base64UrlEncode(header) + \".\" +\n  base64UrlEncode(payload),\n  ✨your-256-bit-secret✨\n)';
 const signatureExample2 = 'HMACSHA256(\n  base64UrlEncode(header) + \".\" +\n  base64UrlEncode(payload),\n  your-super-secret-key\n)';
 const signatureExample3 = 'HMACSHA256(\n  base64UrlEncode(header) + \".\" +\n  base64UrlEncode(payload),\n  nPilVwFjcF0v5NL5YT1xsiwRJCGqM1do\n)';
-const ReservedClaimsExample = '{\n  \"sub\": 12345678, \n  \"iss\": \"Sambego\", \n  \"iat\": 1542361619597, \n  \"exp\": 1542361719597\n}';
+const ReservedClaimsExample = '{\n  \"sub\": 12345678, \n  \"iss\": \"https://sambego.tech\", \n  \"iat\": 1516239022, \n  \"exp\": 1552305710\n}';
 const PublicClaimsExample = '{\n  \"family_name\": \"Bellen\", \n  \"given_name\": \"Sam\",\n  \"preferred_username\": \"Sambego\"\n}';
 const PrivateClaimsExample = '{\n  \"foo\": \"bar\",\n  \"anything\": \"you want\"\n}';
 const jsExample = "const headers = new Headers({\n  \"content-type\": \"application/json\",\n  \"Authorization\", \"Bearer RWA...CFyw7\"\n});\n\nconst request = new Request(\"https://api.sambego.be/cats\", {\n  headers,\n  method: \"GET\"\n});\n\nfetch(request)\n  .then(response => response.json())\n  .then(response => {\n    // 🎉 we made a request to a protected endpoint\n    console.log(response)\n  });";
+const accessTokenCode = "{\n  \"iss\": \"https://sambego.eu.auth0.com/\",\n  \"sub\": \"auth0|5b10...ae62\",\n  \"aud\": [\n    \"my-audience\",\n  ],\n  \"iat\": 1554361012,\n  \"exp\": 1554368212,\n  \"azp\": \"gkWZ...Nx9y\",\n  \"scope\": \"openid profile\"\n}";
+const idTokenCode = "{\n  \"nickname\": \"sambellen\",\n  \"name\": \"sambellen@gmail.com\",\n  \"picture\": \"https://s.gravatar.com/avatar/...avatars.png\",\n  \"updated_at\": \"2019-04-04T06:56:52.907Z\",\n  \"iss\": \"https://sambego.eu.auth0.com/\",\n  \"sub\": \"auth0|5b10....ae62\",\n  \"aud\": \"gkWZ...kNx9y\",\n  \"iat\": 1554361012,\n  \"exp\": 1554397012,\n}";
 
 console.log('----------------');
 console.log('Checking what\'s under the hood? Let me make it easy for you!');
@@ -182,10 +184,17 @@ ReactDOM.render(
         note="A token is any unique string that can be used as an identifier. Oauth does not specify what format a token should be. OIDC does specify that the ID token should be a JWT, but since it is just a layer on top of OAuth, the type of the access token and refresh token are free too choose"
       />
       <Subtitle text="A unique identifier representing something" />
+
+      <Subtitle text="There are different kinds of tokens" />
+      <Subtitle text="Access token" />
+      <Subtitle text="ID Token" />
+      <Subtitle text="Refresh Token" />
+
       <Subtitle text="Often an opaque string in the form of a UUID" />
       <Subtitle text="Can be XML (SAML)" />
       <Subtitle text={(<span>JSON Web <span style={{color: "#69c"}}>Token</span></span>)} />
       <Subtitle text={<span>At <span style={{color: '#EB5424'}}>Auth0</span> we use JWTs as much as possible!</span>} />
+
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
       <Subtitle text="A JSON Web token is made out of 3 different parts" />
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c", opacity: ".1"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
@@ -202,6 +211,13 @@ ReactDOM.render(
       <Code title="Signature" code={signatureExample3} note="Usually the secret will look like this, a random, unique generated 256bit string. This key is used by the server issuing the JWT to generate the signature. Anybody (any server) who knows the secret key can now verify if the signature is valid or not. Demo: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6IlNhbWJlZ28ifQ.hCBl313U03yirP8Om7njFCuA7yDn9bZJ8nf9bddEtyQ. Secret: “secret”"/>
 
       <JWTPlayground />
+
+      <Subtitle text="Some real world examples"/>
+      <Subtitle text="Access token" />
+      <Code title="Access Token" code={accessTokenCode} />
+      <Subtitle text="ID Token" />
+      <Code title="ID Token" code={idTokenCode} />
+
       <Code code={"const header = {...};\nconst payload = {...};\nconst secret = 'secret';\nconst signature = \n  CryptoJS.HmacSHA256(`${btoa(header)}.${btoa(payload)}`, secret)\n    .toString(CryptoJS.enc.Base64);\n\nconst JWT = `${btoa(header)}.${btoa(payload).${signature};`"} />
 
       <Subtitle text="Asymetric alogrithms" note="Use a private and public key combination to sign and verigy a JWT" />
@@ -211,12 +227,14 @@ ReactDOM.render(
       <Subtitle text="JWK" note="JSON Web Key" />
       <Code code={'{\n  \"keys\": [\n    {\n      \"alg\": \"RS256\",\n      \"kty\": \"RSA\",\n      \"use\": \"sig\",\n      \"x5c\": [\n        \"MIIDAzC...8JufiAw==\"\n      ],\n      \"n\": \"qJdLkrX...SE4havw\",\n      \"e\": \"AQAB\",\n      \"kid\": \"NDZDOTV...E1NDgxNg\",\n      \"x5t\": \"NDZDOTV...E1NDgxNg\"\n    }\n  ]\n}'} />
 
+      <Subtitle style={{fontSize: '33px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/openid-configuration">https://sambego.eu.auth0.com/.well-known/openid-configuration</a>} />
+      <Subtitle style={{fontSize: '40px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/jwks.json">https://sambego.eu.auth0.com/.well-known/jwks.json</a>} />
 
       <Subtitle text="JW*" />
-      <Subtitle text="JWT" note="JSON Web Token" />
-      <Subtitle text="JWK" note="JSON Web Key" />
-      <Subtitle text="JWS" note="JSON Web Signature" />
-      <Subtitle text="JWE" note="JSON Web Encryption" />
+      <Subtitle text={<span>JWT<span style={{color: '#e7e9e9'}}>oken</span></span>} note="JSON Web Token" />
+      <Subtitle text={<span>JWK<span style={{color: '#e7e9e9'}}>ey</span></span>} note="JSON Web Key" />
+      <Subtitle text={<span>JWS<span style={{color: '#e7e9e9'}}>ignature</span></span>} note="JSON Web Signature" />
+      <Subtitle text={<span>JWE<span style={{color: '#e7e9e9'}}>encryption</span></span>} note="JSON Web Encryption" />
 
       <Subtitle text="Let's make a little comparison"/>
       <Compare title="Header" code={headerExample} img={header} />
@@ -226,6 +244,11 @@ ReactDOM.render(
       <Subtitle text="Let's see it in action" note="Demo in insomnia. Expired JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.SydhBwpSQJhjtGZ9dafuu1Vl8cvqBtsEHH2BHEn_oSY Invalid signature: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.BcOa0Bt0Az1f-RWAT9CFyw7pUb2dMIMDRb5vgjjNKBU Valid JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.yZK3swRZOI3Ed2X1iz5np-CQyXG9qNTy_5gCcu2tyU0" />
 
       <JWT />
+
+      <Subtitle text="Are there downsides to JSON Web Tokens?"/>
+      <Subtitle text="Invalidation of tokens is a bit harder"/>
+      <Subtitle text="Leaked secrets / keys can be a headache"/>
+      <Subtitle text="Don't put sensitive data in your JWT!"/>
 
       <Subtitle
         text="Token based authentication"
@@ -383,10 +406,10 @@ ReactDOM.render(
         <li><a href="https://auth0.com/blog" target="_blank" style={{display: 'block', color: 'black'}}>https://auth0.com/blog</a></li>
       </List>} />
 
-      <Subtitle text={<a href="https://jwt.sambego.tech/" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech/</a>} />
+      <Subtitle text={<a href="https://jwt.sambego.tech" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech</a>} />
 
       <Questions />
-      <Subtitle text="Danke!" />
+
       <Thanks />
       <Poes2 />
     </Deck>,
