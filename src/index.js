@@ -2,8 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import Deck from "./components/Deck";
+import Slide from "./components/Slide";
 import Title from "./slides/Title";
 import Subtitle from "./slides/Subtitle";
+import Text from "./components/Text";
 import Summary from "./slides/Summary";
 import Scheme from "./slides/Scheme";
 import About from "./slides/About";
@@ -290,9 +292,6 @@ ReactDOM.render(
         note="So, we are authenticated, let’s now request some data from our API"
       />
 
-      <SPASummary />
-
-      <Code code={jsExample} />
       <Subtitle text="OAuth" note="Who’s ever heard of OAuth? Eg, Google, Facebook, twitter, …" />
       <Subtitle text="OpenId Connect" note="And what about OIDC. OIDC is OAuth with an extra identity layer on top. Example is It’s me, Auth0, Google, amazon, …"/>
       <Scheme
@@ -353,6 +352,9 @@ ReactDOM.render(
       <Scheme
         src={pkce4}
       />
+
+      <Subtitle text="A note about Refresh tokens and SPAs" />
+      <Slide><Text style={{maxWidth: '80vw'}}>Using refresh tokens in the front-end should be avoided, <strong>unless a system of refresh token rotation or sender-constrains is in place</strong>.</Text></Slide>
 
       <Subtitle text="Does this approach solve CORS?" note="Yes, the only server which needs to use the session cookie is the auth server" />
       <Subtitle text="Does this approach solve flow?" note="Yes, tokens can be passed from server to server. As long as all our servers can verify our tokens we can assure the user is allowed to access the API / resource" />
