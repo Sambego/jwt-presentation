@@ -21,6 +21,8 @@ import Questions from "./slides/Questions";
 import Thanks from "./slides/Thanks";
 
 import List from "./components/List";
+import Text from "./components/Text";
+import Slide from "./components/Slide";
 
 import "./styles/styles.css";
 
@@ -205,20 +207,15 @@ ReactDOM.render(
       <Code title="Public claims" code={PublicClaimsExample} note="Claims registered with IANA -> https://www.iana.org/assignments/jwt/jwt.xhtml#claims Meant for api interoperability. eg: family_nam, given_name (not first_name), "/>
       <Code title="Private claims" code={PrivateClaimsExample} />
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
-      <Code title="Signature" code={signatureExample} />
-      <Subtitle text="JWTs can be verified!"/>
-      <Code title="Signature" code={signatureExample2} />
-      <Code title="Signature" code={signatureExample3} note="Usually the secret will look like this, a random, unique generated 256bit string. This key is used by the server issuing the JWT to generate the signature. Anybody (any server) who knows the secret key can now verify if the signature is valid or not. Demo: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6IlNhbWJlZ28ifQ.hCBl313U03yirP8Om7njFCuA7yDn9bZJ8nf9bddEtyQ. Secret: “secret”"/>
 
-      <JWTPlayground />
+      <Code title="Signature" code={signatureExample3} note="Usually the secret will look like this, a random, unique generated 256bit string. This key is used by the server issuing the JWT to generate the signature. Anybody (any server) who knows the secret key can now verify if the signature is valid or not. Demo: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6IlNhbWJlZ28ifQ.hCBl313U03yirP8Om7njFCuA7yDn9bZJ8nf9bddEtyQ. Secret: “secret”"/>
+      <Subtitle text="JWTs can be verified!"/>
 
       <Subtitle text="Some real world examples"/>
       <Subtitle text="Access token" />
       <Code title="Access Token" code={accessTokenCode} />
       <Subtitle text="ID Token" />
       <Code title="ID Token" code={idTokenCode} />
-
-      <Code code={"const header = {...};\nconst payload = {...};\nconst secret = 'secret';\nconst signature = \n  CryptoJS.HmacSHA256(`${btoa(header)}.${btoa(payload)}`, secret)\n    .toString(CryptoJS.enc.Base64);\n\nconst JWT = `${btoa(header)}.${btoa(payload).${signature};`"} />
 
       <Subtitle text="Asymetric alogrithms" note="Use a private and public key combination to sign and verigy a JWT" />
       <AlgSummary />
@@ -229,12 +226,6 @@ ReactDOM.render(
 
       <Subtitle style={{fontSize: '33px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/openid-configuration">https://sambego.eu.auth0.com/.well-known/openid-configuration</a>} />
       <Subtitle style={{fontSize: '40px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/jwks.json">https://sambego.eu.auth0.com/.well-known/jwks.json</a>} />
-
-      <Subtitle text="JW*" />
-      <Subtitle text={<span>JWT<span style={{color: '#e7e9e9'}}>oken</span></span>} note="JSON Web Token" />
-      <Subtitle text={<span>JWK<span style={{color: '#e7e9e9'}}>ey</span></span>} note="JSON Web Key" />
-      <Subtitle text={<span>JWS<span style={{color: '#e7e9e9'}}>ignature</span></span>} note="JSON Web Signature" />
-      <Subtitle text={<span>JWE<span style={{color: '#e7e9e9'}}>encryption</span></span>} note="JSON Web Encryption" />
 
       <Subtitle text="Let's make a little comparison"/>
       <Compare title="Header" code={headerExample} img={header} />
@@ -290,11 +281,10 @@ ReactDOM.render(
         note="So, we are authenticated, let’s now request some data from our API"
       />
 
-      <SPASummary />
-
-      <Code code={jsExample} />
       <Subtitle text="OAuth" note="Who’s ever heard of OAuth? Eg, Google, Facebook, twitter, …" />
+      <Slide><Text style={{maxWidth: '80vw'}}>OAuth 2.0 is a protocol that allows a user to <span style={{fontWeight: 'bold'}}>grant limited access to their resources</span> on one site, to another site, without having to expose their credentials.</Text></Slide>
       <Subtitle text="OpenId Connect" note="And what about OIDC. OIDC is OAuth with an extra identity layer on top. Example is It’s me, Auth0, Google, amazon, …"/>
+      <Slide><Text style={{maxWidth: '80vw'}}><span style={{fontWeight: 'bold'}}>OIDC was created as an identity layer for OAuth 2.0</span> because while OAuth provides a solid standard for user Authentication, developers needed a standard way of expressing user identity.</Text></Slide>
       <Scheme
         src={oidc1}
         note="Let’s see a simple ODIC example. I’m using a separate Authorization server. This is a common practice and separates the authorization from all other logic. Eg accounts.google.com -> gmail, youtube, …"
@@ -318,24 +308,6 @@ ReactDOM.render(
         src={oidc6}
         note="The server will send back your requested information"
       />
-      <Subtitle text="Will the user have to login with every visit?" note="Like I said before, we’re only storing the tokens in memory. This is for security reasons. Of course this will cause a bad user experience. Here’s a solution to persist the tokens after login."/>
-      <Subtitle text="The login flow remains the same" note="User sends credentials, server checks these and returns tokens if valid"/>
-      <Scheme
-        src={oidc7}
-        note="Asside from the tokens, the auth server will also set a cookie with a session token"
-      />
-      <Subtitle text="With each next visit we will request the tokens again, silently" note="" />
-      <Scheme
-        src={oidc8}
-        note="When we have a session cookie saved, we will do a silent request in an iframe to the auth server"
-      />
-      <Scheme
-        src={oidc9}
-      />
-      <Scheme
-        src={oidc10}
-        note="If the silent auth request returns tokens, we can use these to access protected resources"
-      />
 
       <Subtitle text="OAuth Implicit Flow" />
       <Subtitle text="IETF published a new best practices document" note="The internet engineering taskforce" />
@@ -354,48 +326,12 @@ ReactDOM.render(
         src={pkce4}
       />
 
+      <Subtitle text="A note about Refresh tokens and SPAs" />
+      <Slide><Text style={{maxWidth: '80vw'}}>Using refresh tokens in the front-end should be avoided, <strong>unless a system of refresh token rotation or sender-constrains is in place</strong>.</Text></Slide>
+
       <Subtitle text="Does this approach solve CORS?" note="Yes, the only server which needs to use the session cookie is the auth server" />
       <Subtitle text="Does this approach solve flow?" note="Yes, tokens can be passed from server to server. As long as all our servers can verify our tokens we can assure the user is allowed to access the API / resource" />
       <Subtitle text="Does this approach solve keeping state?" note="If we would save the tokens on the frontend we would not have to keep state on our servers, but unfortunately this can cause some security vulnerabilities.With this approach our auth server will still need to keep a list of sessions." />
-
-      <Subtitle
-        text="Future of authentication"
-        background="#f99157"
-        color="#fff"
-        note="We talked a bit of the past and present of authenticating, but are there new technologies, ways to authenticate on the horizon?"
-      />
-      <Subtitle text="Web Authentication API" />
-      <Subtitle text="Web Authn" />
-      <Subtitle text={(<span>No more passwords<sup>*</sup> 🎉</span>)} note="Using the webauthn api we can register and authenticate using authentication devices instead of passwords. At the moment most browsers have only implemented half of the specs, but are working on it. It can already be used as a 2nd factor auth."/>
-      <Subtitle text="That’s not new, we’ve had passwordless login for a while now!" note="Eg slack, True, passwordless is becoming more and more common. With passwordless you register using a email and password. When you want to log in, you receive an email / sms with a link containing a single use token (otp) to login in. This works well, but is nog as seamless as we would like." />
-      <Subtitle text="Loggin in with an authenticator device" />
-
-      <Scheme
-        src={webauthn1}
-        note="The user wants to acces a protected resource"
-      />
-      <Scheme
-        src={webauthn2}
-        note="The auth server will return a challenge"
-      />
-      <Scheme
-        src={webauthn3}
-        note="The auth server will return a challenge to the browser. The connected authentication device will create a private/public key pair and sign this challenge using the private key"
-      />
-      <Scheme
-        src={webauthn4}
-        note="Once the auth device signed the challenge it will return the signed challenge"
-      />
-      <Scheme
-        src={webauthn5}
-        note="We send this response to our auth server where it will deduce the public key from the response. We can then save that public key with our user details. From now on we can validate each new response with this public key."
-      />
-
-      <Webauthn />
-      <Subtitle text="Who has an authenticator device?" note="You sure? Who owns a phone or laptop with a fingerprint scanner or face id?"/>
-      <Webauthn platform/>
-
-      <Subtitle text={<a href="https://webauthn.me" style={{color: 'black'}} target="_blank">https://webauthn.me</a>} />
 
       <FinalSummary />
 
