@@ -292,8 +292,12 @@ ReactDOM.render(
         note="So, we are authenticated, let’s now request some data from our API"
       />
 
+
       <Subtitle text="OAuth" note="Who’s ever heard of OAuth? Eg, Google, Facebook, twitter, …" />
+      <Slide><Text style={{maxWidth: '80vw'}}>OAuth 2.0 is a protocol that allows a user to <span style={{fontWeight: 'bold'}}>grant limited access to their resources</span> on one site, to another site, without having to expose their credentials.</Text></Slide>
       <Subtitle text="OpenId Connect" note="And what about OIDC. OIDC is OAuth with an extra identity layer on top. Example is It’s me, Auth0, Google, amazon, …"/>
+      <Slide><Text style={{maxWidth: '80vw'}}><span style={{fontWeight: 'bold'}}>OIDC was created as an identity layer for OAuth 2.0</span> because while OAuth provides a solid standard for user Authentication, developers needed a standard way of expressing user identity.</Text></Slide>
+
       <Scheme
         src={oidc1}
         note="Let’s see a simple ODIC example. I’m using a separate Authorization server. This is a common practice and separates the authorization from all other logic. Eg accounts.google.com -> gmail, youtube, …"

@@ -48,7 +48,7 @@ export default class Thanks extends Component {
     return (
       <Slide style={{ backgroundColor: this.state.background }}>
         <Subtitle>
-          Paldies!
+          Thanks!
         </Subtitle>
       </Slide>
     );
