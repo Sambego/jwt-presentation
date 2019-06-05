@@ -86,6 +86,19 @@ const jsExample = "const headers = new Headers({\n  \"content-type\": \"applicat
 const accessTokenCode = "{\n  \"iss\": \"https://sambego.eu.auth0.com/\",\n  \"sub\": \"auth0|5b10...ae62\",\n  \"aud\": [\n    \"my-audience\",\n  ],\n  \"iat\": 1554361012,\n  \"exp\": 1554368212,\n  \"azp\": \"gkWZ...Nx9y\",\n  \"scope\": \"openid profile\"\n}";
 const idTokenCode = "{\n  \"nickname\": \"sambellen\",\n  \"name\": \"sambellen@gmail.com\",\n  \"picture\": \"https://s.gravatar.com/avatar/...avatars.png\",\n  \"updated_at\": \"2019-04-04T06:56:52.907Z\",\n  \"iss\": \"https://sambego.eu.auth0.com/\",\n  \"sub\": \"auth0|5b10....ae62\",\n  \"aud\": \"gkWZ...kNx9y\",\n  \"iat\": 1554361012,\n  \"exp\": 1554397012,\n}";
 
+const webauthnCode1 = "navigator.credentials.create(createConfig);";
+const webauthnCode2 = "const createConfig = {\n  publicKey: {\n    ...\n  }\n}";
+const webauthnCode3 = "{\n  ...\n  // random, cryptographically secure, at least 16 bytes\n  challenge: createRandomUint8Array().buffer,\n  ...\n }";
+const webauthnCode4 = "{\n  ...\n  // relying party\n  rp: {\n    name: 'Sambego.tech'\n  },\n  ...\n }";
+const webauthnCode5 = "{\n  ...\n  // user information\n  user: {\n    id: createRandomUint8Array(),\n    name: 'Sam Bellen',\n    displayName: 'Sambego'\n  },\n  ...\n }";
+const webauthnCode6 = "{\n  ...\n  // information about the allowed authenticator device\n  authenticatorSelection: {  \n    // optional, can also be 'cross-platform'\n    authenticatorAttachment: 'platform',\n    // optional, can also be 'require ' and 'discouraged'\n    userVerification: 'preferred'\n  },\n  ...\n }";
+const webauthnCode7 = "{\n  ...\n  // information about the attestation, to prove the user's identity\n  // can also be 'indirect' and 'non ' to remove identifying information\n  attestation: 'direct',\n  ...\n }";
+const webauthnCode8 = "navigator.credentials.get(getConfig);";
+const webauthnCode9 = "const getConfig = {\n  publicKey: {\n    ...\n  }\n}";
+const webauthnCode10 = "{\n  ...\n  // random, cryptographically secure, at least 16 bytes\n  challenge: createRandomUint8Array().buffer,\n  ...\n}";
+const webauthnCode11 = "{\n  ...\n  // The allowed credentials\n  allowCredentials: [\n    {\n      id: credentials.rawId,\n      type: 'public-key'\n    }\n  ],\n  ...\n}";
+const webauthnCode12 = "{\n  ...\n  // information about the allowed authenticator device\n  authenticatorSelection: { \n    // optional, can also be 'required' and 'discouraged'\n    userVerification: 'preferred' \n  }\n  ...\n}";
+
 console.log('----------------');
 console.log('Checking what\'s under the hood? Let me make it easy for you!');
 console.log('The source of this presentation can be found at: https://github.com/sambego/jwt-presentation');
@@ -292,6 +305,7 @@ ReactDOM.render(
         note="So, we are authenticated, let’s now request some data from our API"
       />
 
+      <Code code={jsExample} />
 
       <Subtitle text="OAuth" note="Who’s ever heard of OAuth? Eg, Google, Facebook, twitter, …" />
       <Slide><Text style={{maxWidth: '80vw'}}>OAuth 2.0 is a protocol that allows a user to <span style={{fontWeight: 'bold'}}>grant limited access to their resources</span> on one site, to another site, without having to expose their credentials.</Text></Slide>
@@ -357,6 +371,10 @@ ReactDOM.render(
         src={pkce4}
       />
 
+      <Subtitle text="A note about Access Tokens as JWTs" />
+      <Slide><Text style={{maxWidth: '80vw'}}>OAuth and Open ID Connect do not specify what format an access token should be, <br/><strong>they do not have to be JWTs</strong>. <br/><br/><a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-access-token-jwt/?include_text=1" target="_blank" style={{color: 'black'}}>There's an IETF draft to standardise this</a>.</Text></Slide>
+      <Slide><Text style={{maxWidth: '80vw'}}><strong>ID Tokens are always JWTs</strong>, per the OIDC spec.</Text></Slide>
+
       <Subtitle text="A note about Refresh tokens and SPAs" />
       <Slide><Text style={{maxWidth: '80vw'}}>Using refresh tokens in the front-end should be avoided, <strong>unless a system of refresh token rotation or sender-constrains is in place</strong>.</Text></Slide>
 
@@ -401,6 +419,22 @@ ReactDOM.render(
       <Subtitle text="Who has an authenticator device?" note="You sure? Who owns a phone or laptop with a fingerprint scanner or face id?"/>
       <Webauthn platform/>
 
+      <Subtitle text="Register a new credential" />
+      <Code code={webauthnCode1}/>
+      <Code code={webauthnCode2}/>
+      <Code code={webauthnCode3}/>
+      <Code code={webauthnCode4}/>
+      <Code code={webauthnCode5}/>
+      <Code code={webauthnCode6}/>
+
+
+      <Subtitle text="Use a previously registered credential" />
+      <Code code={webauthnCode8}/>
+      <Code code={webauthnCode9}/>
+      <Code code={webauthnCode10}/>
+      <Code code={webauthnCode11}/>
+      <Code code={webauthnCode12}/>
+
       <Subtitle text={<a href="https://webauthn.me" style={{color: 'black'}} target="_blank">https://webauthn.me</a>} />
 
       <FinalSummary />
@@ -414,9 +448,11 @@ ReactDOM.render(
 
       <Subtitle text={<a href="https://jwt.sambego.tech" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech</a>} />
 
-      <Questions />
+      <Subtitle text={<>Why you shouldn't care about security <br/>-<br/> Tomorrow 12:00 in Maritim A</>} />
+      <Subtitle text={<>Opening doors with JWTs <br/>-<br/> Thursday 14:15 in Maritim B/C</>} />
 
       <Thanks />
+      <Questions />
       <Poes2 />
     </Deck>,
     document.getElementById("app")
