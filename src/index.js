@@ -21,6 +21,7 @@ import Webauthn from './slides/Webauthn';
 import FinalSummary from './slides/FinalSummary';
 import Questions from "./slides/Questions";
 import Thanks from "./slides/Thanks";
+import Video from "./slides/Video";
 
 import List from "./components/List";
 
@@ -98,6 +99,12 @@ const webauthnCode9 = "const getConfig = {\n  publicKey: {\n    ...\n  }\n}";
 const webauthnCode10 = "{\n  ...\n  // random, cryptographically secure, at least 16 bytes\n  challenge: createRandomUint8Array().buffer,\n  ...\n}";
 const webauthnCode11 = "{\n  ...\n  // The allowed credentials\n  allowCredentials: [\n    {\n      id: credentials.rawId,\n      type: 'public-key'\n    }\n  ],\n  ...\n}";
 const webauthnCode12 = "{\n  ...\n  // information about the allowed authenticator device\n  authenticatorSelection: { \n    // optional, can also be 'required' and 'discouraged'\n    userVerification: 'preferred' \n  }\n  ...\n}";
+
+import iana from "./video/iana.mov";
+import jwt from "./video/jwt.mov";
+import demo from "./video/demo.mov";
+import insomnia from "./video/insomnia.mov";
+import wellKnown from "./video/well-known.mov";
 
 console.log('----------------');
 console.log('Checking what\'s under the hood? Let me make it easy for you!');
@@ -218,6 +225,7 @@ ReactDOM.render(
       <Code title="Payload" code={payloadExample} note="The payload contains claims. A claim is a key value pair of information which can be useful to the SPA" />
       <Code title="Reserved claims" code={ReservedClaimsExample} />
       <Code title="Public claims" code={PublicClaimsExample} note="Claims registered with IANA -> https://www.iana.org/assignments/jwt/jwt.xhtml#claims Meant for api interoperability. eg: family_nam, given_name (not first_name), "/>
+      <Video src={iana} />
       <Code title="Private claims" code={PrivateClaimsExample} />
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
       <Code title="Signature" code={signatureExample} />
@@ -244,6 +252,7 @@ ReactDOM.render(
 
       <Subtitle style={{fontSize: '33px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/openid-configuration">https://sambego.eu.auth0.com/.well-known/openid-configuration</a>} />
       <Subtitle style={{fontSize: '40px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/jwks.json">https://sambego.eu.auth0.com/.well-known/jwks.json</a>} />
+      <Video src={wellKnown} />
 
       <Subtitle text="JW*" />
       <Subtitle text={<span>JWT<span style={{color: '#e7e9e9'}}>oken</span></span>} note="JSON Web Token" />
@@ -257,8 +266,11 @@ ReactDOM.render(
       <Compare title="Signature" code={signatureExample} img={signature} />
 
       <Subtitle text="Let's see it in action" note="Demo in insomnia. Expired JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.SydhBwpSQJhjtGZ9dafuu1Vl8cvqBtsEHH2BHEn_oSY Invalid signature: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.BcOa0Bt0Az1f-RWAT9CFyw7pUb2dMIMDRb5vgjjNKBU Valid JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.yZK3swRZOI3Ed2X1iz5np-CQyXG9qNTy_5gCcu2tyU0" />
+      <Video src={demo} />
+      <Video src={insomnia} />
 
       <JWT />
+      <Video src={jwt} />
 
       <Subtitle text="Are there downsides to JSON Web Tokens?"/>
       <Subtitle text="Invalidation of tokens is a bit harder"/>
