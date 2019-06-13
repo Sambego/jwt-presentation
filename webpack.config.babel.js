@@ -39,7 +39,7 @@ export default {
                 use: "svg-inline-loader"
             },
             {
-                test: /\.mp4/,
+                test: /\.(mp4|mov)$/,
                 use: "file-loader"
             }
         ]
