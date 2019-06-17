@@ -460,9 +460,6 @@ ReactDOM.render(
 
       <Subtitle text={<a href="https://jwt.sambego.tech" style={{color: 'black'}} target="_blank">https://jwt.sambego.tech</a>} />
 
-      <Subtitle text={<>Why you shouldn't care about security <br/>-<br/> Tomorrow 12:00 in Maritim A</>} />
-      <Subtitle text={<>Opening doors with JWTs <br/>-<br/> Thursday 14:15 in Maritim B/C</>} />
-
       <Thanks />
       <Questions />
       <Poes2 />
