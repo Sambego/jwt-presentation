@@ -74,6 +74,8 @@ import header from "./images/header.svg";
 import payload from "./images/payload.svg";
 import signature from "./images/signature.svg";
 
+import handbook from "./images/jwt-handbook.png";
+
 const headerExample = '{\n  "alg": "HS256",\n  "typ": "JWT"\n}';
 const payloadExample = '{\n  \"sub\": \"1234567890\",\n  \"given_name\": \"Sam\",\n  \"family_name\": \"Bellen\",\n  \"preferred_username\": \"Sambego\",\n  \"iat\": 1516239022,\n  "exp": 1552305710\n}';
 const signatureExample = 'HMACSHA256(\n  base64UrlEncode(header) + \".\" +\n  base64UrlEncode(payload),\n  ✨your-256-bit-secret✨\n)';
@@ -245,11 +247,11 @@ ReactDOM.render(
       <Subtitle style={{fontSize: '33px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/openid-configuration">https://sambego.eu.auth0.com/.well-known/openid-configuration</a>} />
       <Subtitle style={{fontSize: '40px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/jwks.json">https://sambego.eu.auth0.com/.well-known/jwks.json</a>} />
 
-      <Subtitle text="JW*" />
-      <Subtitle text={<span>JWT<span style={{color: '#e7e9e9'}}>oken</span></span>} note="JSON Web Token" />
-      <Subtitle text={<span>JWK<span style={{color: '#e7e9e9'}}>ey</span></span>} note="JSON Web Key" />
-      <Subtitle text={<span>JWS<span style={{color: '#e7e9e9'}}>ignature</span></span>} note="JSON Web Signature" />
-      <Subtitle text={<span>JWE<span style={{color: '#e7e9e9'}}>encryption</span></span>} note="JSON Web Encryption" />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>*</span></span>} />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Token</span></span>} note="JSON Web Token" />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Key</span></span>} note="JSON Web Key" />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Signature</span></span>} note="JSON Web Signature" />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Encryption</span></span>} note="JSON Web Encryption" />
 
       <Subtitle text="Let's make a little comparison"/>
       <Compare title="Header" code={headerExample} img={header} />
@@ -259,6 +261,10 @@ ReactDOM.render(
       <Subtitle text="Let's see it in action" note="Demo in insomnia. Expired JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.SydhBwpSQJhjtGZ9dafuu1Vl8cvqBtsEHH2BHEn_oSY Invalid signature: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.BcOa0Bt0Az1f-RWAT9CFyw7pUb2dMIMDRb5vgjjNKBU Valid JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImlhdCI6MTUzOTYwNjk3NDQzMCwiZXhwIjoxNTcxMTQyOTc0NDMwLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzYW1iZWdvIn0.yZK3swRZOI3Ed2X1iz5np-CQyXG9qNTy_5gCcu2tyU0" />
 
       <JWT />
+      <Slide>
+        <img style={{height: '65vh', width: 'auto', boxShadow: '0 10px 20px 0 rgba(0,0,0,0.5)', marginBottom: '2rem'}} src={handbook} alt="JWT handbook" />
+        <Text><a style={{color: '#000'}} href="https://auth0.com/resources/ebooks/jwt-handbook">https://auth0.com/resources/ebooks/jwt-handbook</a></Text>
+      </Slide>
 
       <Subtitle text="Are there downsides to JSON Web Tokens?"/>
       <Subtitle text="Invalidation of tokens is a bit harder"/>
@@ -393,7 +399,6 @@ ReactDOM.render(
       <Subtitle text={(<span>No more passwords<sup>*</sup> 🎉</span>)} note="Using the webauthn api we can register and authenticate using authentication devices instead of passwords. At the moment most browsers have only implemented half of the specs, but are working on it. It can already be used as a 2nd factor auth."/>
       <Subtitle text="That’s not new, we’ve had passwordless login for a while now!" note="Eg slack, True, passwordless is becoming more and more common. With passwordless you register using a email and password. When you want to log in, you receive an email / sms with a link containing a single use token (otp) to login in. This works well, but is nog as seamless as we would like." />
       <Subtitle text="Loggin in with an authenticator device" />
-
       <Scheme
         src={webauthn1}
         note="The user wants to acces a protected resource"
@@ -414,11 +419,9 @@ ReactDOM.render(
         src={webauthn5}
         note="We send this response to our auth server where it will deduce the public key from the response. We can then save that public key with our user details. From now on we can validate each new response with this public key."
       />
-
       <Webauthn />
       <Subtitle text="Who has an authenticator device?" note="You sure? Who owns a phone or laptop with a fingerprint scanner or face id?"/>
       <Webauthn platform/>
-
       <Subtitle text="Register a new credential" />
       <Code code={webauthnCode1}/>
       <Code code={webauthnCode2}/>
@@ -426,15 +429,12 @@ ReactDOM.render(
       <Code code={webauthnCode4}/>
       <Code code={webauthnCode5}/>
       <Code code={webauthnCode6}/>
-
-
       <Subtitle text="Use a previously registered credential" />
       <Code code={webauthnCode8}/>
       <Code code={webauthnCode9}/>
       <Code code={webauthnCode10}/>
       <Code code={webauthnCode11}/>
       <Code code={webauthnCode12}/>
-
       <Subtitle text={<a href="https://webauthn.me" style={{color: 'black'}} target="_blank">https://webauthn.me</a>} />
 
       <FinalSummary />

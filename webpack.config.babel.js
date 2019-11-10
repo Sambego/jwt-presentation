@@ -31,7 +31,7 @@ export default {
                 ]
             },
             {
-                test: /\.(png|jpg|woff|woff2)$/,
+                test: /\.(png|jpg|gif|woff|woff2)$/,
                 use: "file-loader?name=[name].[ext]"
             },
             {
