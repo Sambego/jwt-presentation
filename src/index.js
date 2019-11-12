@@ -116,25 +116,6 @@ console.log('----------------');
 ReactDOM.render(
   <Deck>
       <Title />
-      <Slide>
-          <Columns>
-              <Image
-                  src={Sam}
-                  style={{
-                        width: "50vw",
-                        height: "100vh"
-                    }}
-                  color="#5FB3B3"
-                />
-              <div>
-                  <SubtitleComp>Sam Bellen</SubtitleComp>
-                  <List>
-                      <li>I am not a PHP developer 😱</li>
-                      <li>&nbsp;</li>
-                    </List>
-                </div>
-            </Columns>
-        </Slide>
       <About />
       <Poes />
       <Summary />
