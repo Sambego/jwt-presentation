@@ -13,9 +13,6 @@ const SummarySlide = ({ text }) => (
           <li style={{ fontWeight: 700, color: "#ec5f67" }}>
               Token based authentication
           </li>
-          <li style={{ fontWeight: 700, color: "#f99157" }}>
-              Future of authentication
-          </li>
         </List>
     </Slide>
 );

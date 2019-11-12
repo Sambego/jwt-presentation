@@ -11,7 +11,6 @@ const FinalSummarySlide = ({ text }) => (
       <li style={{ fontWeight: 700, color: "#fac863" }}>Using session cookies is hard with SPAs</li>
       <li style={{ fontWeight: 700, color: "#ec5f67" }}>Stateless authentication is possible<sup>*</sup></li>
       <li style={{ fontWeight: 700, color: "#69c" }}>JSON Web Tokens consist of 3 parts</li>
-      <li style={{ fontWeight: 700, color: "#f99157" }}>In the future we can use webauthn</li>
     </List>
   </Slide>
 );

@@ -22,7 +22,10 @@ import FinalSummary from './slides/FinalSummary';
 import Questions from "./slides/Questions";
 import Thanks from "./slides/Thanks";
 
+import Columns from "./components/Columns";
 import List from "./components/List";
+import Image from "./components/Image";
+import SubtitleComp from "./components/Subtitle";
 
 import "./styles/styles.css";
 
@@ -75,6 +78,7 @@ import payload from "./images/payload.svg";
 import signature from "./images/signature.svg";
 
 import handbook from "./images/jwt-handbook.png";
+import Sam from "./images/sam2.jpg";
 
 const headerExample = '{\n  "alg": "HS256",\n  "typ": "JWT"\n}';
 const payloadExample = '{\n  \"sub\": \"1234567890\",\n  \"given_name\": \"Sam\",\n  \"family_name\": \"Bellen\",\n  \"preferred_username\": \"Sambego\",\n  \"iat\": 1516239022,\n  "exp": 1552305710\n}';
@@ -112,6 +116,25 @@ console.log('----------------');
 ReactDOM.render(
   <Deck>
       <Title />
+      <Slide>
+          <Columns>
+              <Image
+                  src={Sam}
+                  style={{
+                        width: "50vw",
+                        height: "100vh"
+                    }}
+                  color="#5FB3B3"
+                />
+              <div>
+                  <SubtitleComp>Sam Bellen</SubtitleComp>
+                  <List>
+                      <li>I am not a PHP developer 😱</li>
+                      <li>&nbsp;</li>
+                    </List>
+                </div>
+            </Columns>
+        </Slide>
       <About />
       <Poes />
       <Summary />
@@ -221,6 +244,8 @@ ReactDOM.render(
       <Code title="Reserved claims" code={ReservedClaimsExample} />
       <Code title="Public claims" code={PublicClaimsExample} note="Claims registered with IANA -> https://www.iana.org/assignments/jwt/jwt.xhtml#claims Meant for api interoperability. eg: family_nam, given_name (not first_name), "/>
       <Code title="Private claims" code={PrivateClaimsExample} />
+      <Subtitle text="Don't put sensitive data in the payload!" />
+      <Subtitle text="Keep the payload small, only put in relevant data!" />
       <Subtitle text={(<span style={{textTransform: 'none'}}><span style={{color: "#ec5f67", opacity: ".1"}}>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.<span style={{color: "#C594C5", opacity: ".1"}}>eyJzdWIiOiIxMjM0NTY3ODkwIiwiZ2l2ZW5fbmFtZSI6IlNhbSIsImZhbWlseV9uYW1lIjoiQmVsbGVuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiU2FtYmVnbyIsImlhdCI6MTUxNjIzOTAyMn0</span>.<span style={{color: "#69c"}}>8dgxpiPlESmjugv2GynQiY9a5LrGvWVKW5RI6eoch9A</span></span>)} style={{maxWidth: "80vw", wordWrap: "break-word", textAlign: "left"}} />
       <Code title="Signature" code={signatureExample} />
       <Subtitle text="JWTs can be verified!"/>
@@ -235,7 +260,13 @@ ReactDOM.render(
       <Subtitle text="ID Token" />
       <Code title="ID Token" code={idTokenCode} />
 
-      <Code code={"const header = {...};\nconst payload = {...};\nconst secret = 'secret';\nconst signature = \n  CryptoJS.HmacSHA256(`${btoa(header)}.${btoa(payload)}`, secret)\n    .toString(CryptoJS.enc.Base64);\n\nconst JWT = `${btoa(header)}.${btoa(payload).${signature};`"} />
+      <Subtitle text={<span>JWTs are part of the <span style={{color: '#3784db'}}>JOSE</span> specification</span>} />
+      <Subtitle text={<span>JSON Object Signing and Encryption</span>} />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>*</span></span>} />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Token</span></span>} note="JSON Web Token" />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Key</span></span>} note="JSON Web Key" />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Signature</span></span>} note="JSON Web Signature" />
+      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Encryption</span></span>} note="JSON Web Encryption" />
 
       <Subtitle text="Asymetric alogrithms" note="Use a private and public key combination to sign and verigy a JWT" />
       <AlgSummary />
@@ -246,12 +277,6 @@ ReactDOM.render(
 
       <Subtitle style={{fontSize: '33px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/openid-configuration">https://sambego.eu.auth0.com/.well-known/openid-configuration</a>} />
       <Subtitle style={{fontSize: '40px'}} text={<a style={{color: 'black'}} href="https://sambego.eu.auth0.com/.well-known/jwks.json">https://sambego.eu.auth0.com/.well-known/jwks.json</a>} />
-
-      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>*</span></span>} />
-      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Token</span></span>} note="JSON Web Token" />
-      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Key</span></span>} note="JSON Web Key" />
-      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Signature</span></span>} note="JSON Web Signature" />
-      <Subtitle text={<span>JW<span style={{color: '#3784db'}}>Encryption</span></span>} note="JSON Web Encryption" />
 
       <Subtitle text="Let's make a little comparison"/>
       <Compare title="Header" code={headerExample} img={header} />
@@ -315,8 +340,10 @@ ReactDOM.render(
 
       <Subtitle text="OAuth" note="Who’s ever heard of OAuth? Eg, Google, Facebook, twitter, …" />
       <Slide><Text style={{maxWidth: '80vw'}}>OAuth 2.0 is a protocol that allows a user to <span style={{fontWeight: 'bold'}}>grant limited access to their resources</span> on one site, to another site, without having to expose their credentials.</Text></Slide>
+      <Subtitle text={<span><span style={{fontWeight: 'light'}}>For example:</span> <span>importing Gmail contacts into your application</span></span>} note="For example: importing Gmail contacts into your application" />
       <Subtitle text="OpenId Connect" note="And what about OIDC. OIDC is OAuth with an extra identity layer on top. Example is It’s me, Auth0, Google, amazon, …"/>
       <Slide><Text style={{maxWidth: '80vw'}}><span style={{fontWeight: 'bold'}}>OIDC was created as an identity layer for OAuth 2.0</span> because while OAuth provides a solid standard for user Authentication, developers needed a standard way of expressing user identity.</Text></Slide>
+      <Subtitle text={<span><span style={{fontWeight: 'light '}}>For example:</span> <span>logging in with Google</span></span>} note="For example: logging in with Google" />
 
       <Scheme
         src={oidc1}
@@ -361,7 +388,29 @@ ReactDOM.render(
       />
 
       <Subtitle text="OAuth Implicit Flow" />
+      <Slide>
+        <List>
+          <li>Insufficient redirect URI validation</li>
+          <li>Credential leakage by referrer header</li>
+          <li>Browser history</li>
+          <li>Token injection</li>
+        </List>
+      </Slide>
+      <Slide>
+        <SubtitleComp>Insufficient redirect URI validation</SubtitleComp>
+        <Text style={{maxWidth: '80vw'}}><strong>Enforce a strict match</strong> between the <strong>redirect URI requested</strong> at runtime and the one <strong>previously registered</strong> for your client</Text>
+      </Slide>
+      <Slide>
+        <SubtitleComp>Credential leakage by referrer header</SubtitleComp>
+        <Text style={{maxWidth: '80vw'}}>Set the <strong>Referrer-Policy</strong> header</Text>
+      </Slide>
+      <Slide>
+        <SubtitleComp>Browser history</SubtitleComp>
+        <Text style={{maxWidth: '80vw'}}>Use <strong>form post response mode</strong> instead of redirect for authorization response. This is <strong>not always possible with SPAs</strong>.</Text>
+      </Slide>
       <Subtitle text="IETF published a new best practices document" note="The internet engineering taskforce" />
+      <Subtitle text={<a style={{color: '#000'}} href="https://auth0.com/blog/oauth2-implicit-grant-and-spa/">https://auth0.com/blog/<br/>oauth2-implicit-grant-and-spa/</a>} />
+      <Subtitle text={<a style={{color: '#000'}} href="https://tools.ietf.org/html/draft-ietf-oauth-security-topics-11">https://tools.ietf.org/<br/>html/draft-ietf-oauth-security-topics-11</a>} />
       <Subtitle text="Authorization code with Proof Key for Code Exchange (PKCE) Flow" />
 
       <Scheme
@@ -387,55 +436,6 @@ ReactDOM.render(
       <Subtitle text="Does this approach solve CORS?" note="Yes, the only server which needs to use the session cookie is the auth server" />
       <Subtitle text="Does this approach solve flow?" note="Yes, tokens can be passed from server to server. As long as all our servers can verify our tokens we can assure the user is allowed to access the API / resource" />
       <Subtitle text="Does this approach solve keeping state?" note="If we would save the tokens on the frontend we would not have to keep state on our servers, but unfortunately this can cause some security vulnerabilities.With this approach our auth server will still need to keep a list of sessions." />
-
-      <Subtitle
-        text="Future of authentication"
-        background="#f99157"
-        color="#fff"
-        note="We talked a bit of the past and present of authenticating, but are there new technologies, ways to authenticate on the horizon?"
-      />
-      <Subtitle text="Web Authentication API" />
-      <Subtitle text="Web Authn" />
-      <Subtitle text={(<span>No more passwords<sup>*</sup> 🎉</span>)} note="Using the webauthn api we can register and authenticate using authentication devices instead of passwords. At the moment most browsers have only implemented half of the specs, but are working on it. It can already be used as a 2nd factor auth."/>
-      <Subtitle text="That’s not new, we’ve had passwordless login for a while now!" note="Eg slack, True, passwordless is becoming more and more common. With passwordless you register using a email and password. When you want to log in, you receive an email / sms with a link containing a single use token (otp) to login in. This works well, but is nog as seamless as we would like." />
-      <Subtitle text="Loggin in with an authenticator device" />
-      <Scheme
-        src={webauthn1}
-        note="The user wants to acces a protected resource"
-      />
-      <Scheme
-        src={webauthn2}
-        note="The auth server will return a challenge"
-      />
-      <Scheme
-        src={webauthn3}
-        note="The auth server will return a challenge to the browser. The connected authentication device will create a private/public key pair and sign this challenge using the private key"
-      />
-      <Scheme
-        src={webauthn4}
-        note="Once the auth device signed the challenge it will return the signed challenge"
-      />
-      <Scheme
-        src={webauthn5}
-        note="We send this response to our auth server where it will deduce the public key from the response. We can then save that public key with our user details. From now on we can validate each new response with this public key."
-      />
-      <Webauthn />
-      <Subtitle text="Who has an authenticator device?" note="You sure? Who owns a phone or laptop with a fingerprint scanner or face id?"/>
-      <Webauthn platform/>
-      <Subtitle text="Register a new credential" />
-      <Code code={webauthnCode1}/>
-      <Code code={webauthnCode2}/>
-      <Code code={webauthnCode3}/>
-      <Code code={webauthnCode4}/>
-      <Code code={webauthnCode5}/>
-      <Code code={webauthnCode6}/>
-      <Subtitle text="Use a previously registered credential" />
-      <Code code={webauthnCode8}/>
-      <Code code={webauthnCode9}/>
-      <Code code={webauthnCode10}/>
-      <Code code={webauthnCode11}/>
-      <Code code={webauthnCode12}/>
-      <Subtitle text={<a href="https://webauthn.me" style={{color: 'black'}} target="_blank">https://webauthn.me</a>} />
 
       <FinalSummary />
 

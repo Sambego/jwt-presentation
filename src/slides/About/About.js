@@ -20,7 +20,7 @@ const About = () => (
           <div>
               <Subtitle>Sam Bellen</Subtitle>
               <List>
-                  <li>Developer Evangelist</li>
+                  <li>Developer Advocate Engineer</li>
                   <li>Auth0</li>
                   <li>Google Developer Expert</li>
                   <li>Fronteers Belgium</li>
