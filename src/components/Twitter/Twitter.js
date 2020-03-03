@@ -8,7 +8,7 @@ const Twitter = () => (
       target="_blank"
       rel="noopener noreferrer"
     >
-        Sambego
+        @Sambego
     </a>
 );
 

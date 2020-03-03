@@ -2,14 +2,13 @@
  * twitter styles
  */
 
-.twitter {
+.slideLink {
   position: fixed;
   bottom: 2rem;
-  left: 2rem;
+  right: 2rem;
 
   padding: 1rem;
 
-  background-size: 2rem;
   box-shadow: none;
 
   font-size: 3rem;

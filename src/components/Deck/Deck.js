@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Twitter from "../Twitter";
+import SlideLink from "../SlideLink";
 import Keyboard from "../../services/Keyboard";
 
 class Deck extends Component {
@@ -55,6 +56,7 @@ class Deck extends Component {
           <div>
               {this.renderSlide()}
               <Twitter />
+              <SlideLink />
             </div>
         );
     }

@@ -80,6 +80,8 @@ import signature from "./images/signature.svg";
 import handbook from "./images/jwt-handbook.png";
 import Sam from "./images/sam2.jpg";
 
+import NPM from "./video/npm.mp4";
+
 const headerExample = '{\n  "alg": "HS256",\n  "typ": "JWT"\n}';
 const payloadExample = '{\n  \"sub\": \"1234567890\",\n  \"given_name\": \"Sam\",\n  \"family_name\": \"Bellen\",\n  \"preferred_username\": \"Sambego\",\n  \"iat\": 1516239022,\n  "exp": 1552305710\n}';
 const signatureExample = 'HMACSHA256(\n  base64UrlEncode(header) + \".\" +\n  base64UrlEncode(payload),\n  ✨your-256-bit-secret✨\n)';
@@ -117,6 +119,12 @@ ReactDOM.render(
   <Deck>
       <Title />
       <About />
+      <Slide>
+        <video src={NPM} autoPlay style={{ height: "80vh" }}></video>
+        <Text>
+          <span style={{ fontFamily: "monospace" }}>npx @sambego/about-me</span>
+        </Text>
+      </Slide>
       <Poes />
       <Summary />
       <Subtitle
@@ -390,8 +398,8 @@ ReactDOM.render(
         <Text style={{maxWidth: '80vw'}}>Use <strong>form post response mode</strong> instead of redirect for authorization response. This is <strong>not always possible with SPAs</strong>.</Text>
       </Slide>
       <Subtitle text="IETF published a new best practices document" note="The internet engineering taskforce" />
-      <Subtitle text={<a style={{color: '#000'}} href="https://auth0.com/blog/oauth2-implicit-grant-and-spa/">https://auth0.com/blog/<br/>oauth2-implicit-grant-and-spa/</a>} />
-      <Subtitle text={<a style={{color: '#000'}} href="https://tools.ietf.org/html/draft-ietf-oauth-security-topics-11">https://tools.ietf.org/<br/>html/draft-ietf-oauth-security-topics-11</a>} />
+      <Subtitle text={<a style={{color: '#000'}} href="https://auth0.com/blog/oauth2-implicit-grant-and-spa/">auth0.com/blog/<br/>oauth2-implicit-grant-and-spa/</a>} />
+      <Subtitle text={<a style={{color: '#000'}} href="https://tools.ietf.org/html/draft-ietf-oauth-security-topics-11">tools.ietf.org/<br/>html/draft-ietf-oauth-security-topics-11</a>} />
       <Subtitle text="Authorization code with Proof Key for Code Exchange (PKCE) Flow" />
 
       <Scheme
@@ -419,6 +427,11 @@ ReactDOM.render(
       <Subtitle text="Does this approach solve keeping state?" note="If we would save the tokens on the frontend we would not have to keep state on our servers, but unfortunately this can cause some security vulnerabilities.With this approach our auth server will still need to keep a list of sessions." />
 
       <FinalSummary />
+
+      <Slide>
+        <SubtitleComp>Extra, Extra!</SubtitleComp>
+        <SubtitleComp style={{fontFamily: "monospace", background: "#e9e9e9", padding: "1rem 2rem"}}><a style={{color: "#000", textDecoration: 'none'}} href="https://github.com/auth0/express-openid-connect">npm i express-openid-connect</a></SubtitleComp>
+      </Slide>
 
       <Subtitle text={<List>
         <li><a href="https://jwt.io" target="_blank" style={{display: 'block', color: 'black'}}>https://jwt.io</a></li>
